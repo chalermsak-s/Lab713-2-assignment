@@ -178,11 +178,11 @@ app.post("/books", (req: Request, res: Response) => {
   const existingBookIndex = books.findIndex((book) => book.id === newBook.id);
 
   if (existingBookIndex !== -1) {
-    // Update existing book
+    // id มีค่าที่มีในระบบ ให้แก้ไข
     books[existingBookIndex] = newBook;
     res.json({ message: "Book updated", book: newBook });
   } else {
-    // Add new book
+    // เพิ่มข้อมูลใหม่
     newBook.id = books.length + 1;
     books.push(newBook);
     res.json({ message: "Book added", book: newBook });

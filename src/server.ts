@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 const app = express();
-app.use(express.json())
+app.use(express.json());
 const port = 3000;
 
 interface Event {
@@ -171,6 +171,22 @@ app.post("/events", (req: Request, res: Response) => {
   newEvent.id = events.length + 1;
   events.push(newEvent);
   res.json(newEvent);
+});
+
+app.post("/books", (req: Request, res: Response) => {
+  const newBook: Book = req.body;
+  const existingBookIndex = books.findIndex((book) => book.id === newBook.id);
+
+  if (existingBookIndex !== -1) {
+    // Update existing book
+    books[existingBookIndex] = newBook;
+    res.json({ message: "Book updated", book: newBook });
+  } else {
+    // Add new book
+    newBook.id = books.length + 1;
+    books.push(newBook);
+    res.json({ message: "Book added", book: newBook });
+  }
 });
 
 app.listen(port, () => {

@@ -93,12 +93,17 @@ app.get("/test", (req: Request, res: Response) => {
   res.send(output);
 });
 
-app.get("/events", (req, res) => {
-  const category = req.query.category;
-  const filteredEvents = events.filter((event) => event.category === category);
-  res.json(filteredEvents);
+app.get("/events", (req: Request, res: Response) => {
+  if (req.query.category) {
+    const category = req.query.category;
+    const filteredEvents = events.filter(
+      (event) => event.category === category
+    );
+    res.json(filteredEvents);
+  } else {
+    res.json(events);
+  }
 });
-
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);

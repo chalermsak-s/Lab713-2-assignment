@@ -83,6 +83,58 @@ const events: Event[] = [
   },
 ];
 
+interface Book {
+  id: number;
+  title: string;
+  author_name: string;
+  description: string;
+  groups: string[];
+}
+const books: Book[] = [
+  {
+    id: 1,
+    title: "The Great Gatsby",
+    author_name: "F. Scott Fitzgerald",
+    description: "A novel set in the Jazz Age",
+    groups: ["Fiction", "Classic"],
+  },
+  {
+    id: 2,
+    title: "To Kill a Mockingbird",
+    author_name: "Harper Lee",
+    description: "A novel about racial injustice",
+    groups: ["Fiction", "Classic"],
+  },
+  {
+    id: 3,
+    title: "1984",
+    author_name: "George Orwell",
+    description: "A dystopian novel",
+    groups: ["Fiction", "Dystopian"],
+  },
+  {
+    id: 4,
+    title: "The Catcher in the Rye",
+    author_name: "J.D. Salinger",
+    description: "A novel about teenage rebellion",
+    groups: ["Fiction", "Classic"],
+  },
+  {
+    id: 5,
+    title: "Moby-Dick",
+    author_name: "Herman Melville",
+    description: "A novel about a sea captain's obsession",
+    groups: ["Fiction", "Adventure"],
+  },
+  {
+    id: 6,
+    title: "Pride and Prejudice",
+    author_name: "Jane Austen",
+    description: "A novel about manners and marriage",
+    groups: ["Fiction", "Romance"],
+  },
+];
+
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello World!");
 });
@@ -93,15 +145,23 @@ app.get("/test", (req: Request, res: Response) => {
   res.send(output);
 });
 
-app.get("/events", (req: Request, res: Response) => {
-  if (req.query.category) {
-    const category = req.query.category;
-    const filteredEvents = events.filter(
-      (event) => event.category === category
-    );
-    res.json(filteredEvents);
+app.get("/events/:id", (req: Request, res: Response) => {
+  const id = parseInt(req.params.id);
+  const event = events.find((event) => event.id === id);
+  if (event) {
+    res.json(event);
   } else {
-    res.json(events);
+    res.status(404).send("Event not found");
+  }
+});
+
+app.get("/books/:id", (req: Request, res: Response) => {
+  const id = parseInt(req.params.id);
+  const book = books.find((book) => book.id === id);
+  if (book) {
+    res.json(book);
+  } else {
+    res.status(404).send("Book not found");
   }
 });
 

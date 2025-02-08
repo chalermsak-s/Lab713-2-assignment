@@ -1,0 +1,31 @@
+{
+  "name": "backend_lab02_task8_11",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node dist/server.js",
+    "build": "tsc",
+    "dev": "ts-node src/server.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://chalermsak-s@github.com/chalermsak-s/backend_lab02_task8_11.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chalermsak-s/backend_lab02_task8_11/issues"
+  },
+  "homepage": "https://github.com/chalermsak-s/backend_lab02_task8_11#readme",
+  "description": "",
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

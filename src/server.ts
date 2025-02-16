@@ -8,19 +8,19 @@ const app = express()
 app.use(express.json())
 const port = 3000
 
-app.get('/events', (req: Request, res: Response) => {
+app.get('/events', async (req: Request, res: Response) => {
   if (req.query.category) {
     const category = req.query.category as string
     const filteredEvents = getEventByCategory(category as string)
     res.json(filteredEvents)
   } else {
-    res.json(getAllEvents())
+    res.json(await getAllEvents())
   }
 })
 
-app.get('/events/:id', (req, res) => {
+app.get('/events/:id',async (req: Request, res: Response) => {
   const id = parseInt(req.params.id)
-  const event = getEventById(id)
+  const event = await getEventById(id)
   if (event) {
     res.json(event)
   } else {
@@ -28,9 +28,9 @@ app.get('/events/:id', (req, res) => {
   }
 })
 
-app.post('/events', (req, res) => {
+app.post('/events',async (req: Request, res: Response) => {
   const newEvent: Event = req.body
-  addEvent(newEvent)
+  await addEvent(newEvent)
   res.json(newEvent)
 })
 
@@ -44,7 +44,7 @@ app.get('/books', (req: Request, res: Response) => {
   }
 })
 
-app.get('/books/:id', (req, res) => {
+app.get('/books/:id', (req: Request, res: Response) => {
   const id = parseInt(req.params.id)
   const book = getBookById(id)
   if (book) {
@@ -54,7 +54,7 @@ app.get('/books/:id', (req, res) => {
   }
 })
 
-app.post('/books', (req, res) => {
+app.post('/books', (req: Request, res: Response) => {
   const newBook: Book = req.body
   addBook(newBook)
   res.json(newBook)

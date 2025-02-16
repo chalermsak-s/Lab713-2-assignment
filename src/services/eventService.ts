@@ -1,5 +1,5 @@
 import { Event } from '../models/event'
-import * as repo from '../repository/eventRepository'
+import * as repo from '../repository/eventRepositoryDb'
 
 export {Event}
 

@@ -1,5 +1,5 @@
 import { Book } from "../models/book";
-import * as repo from "../repository/bookRepository";
+import * as repo from "../repository/bookRepositoryDb";
 
 export { Book };
 

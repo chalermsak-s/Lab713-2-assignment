@@ -1,8 +1,18 @@
 import express, { Request, Response } from 'express'
-import { getAllEvents, getEventByCategory, getEventById, addEvent } from "./services/eventService";
-import type { Event} from "./services/eventService";
-import { getAllBooks, getBookByGroups, getBookById, addBook } from "./services/bookService";
-import type { Book } from "./services/bookService";
+import {
+  getAllEvents,
+  getEventByCategory,
+  getEventById,
+  addEvent,
+} from './services/eventService'
+import type { Event } from './services/eventService'
+import {
+  getAllBooks,
+  getBookByGroups,
+  getBookById,
+  addBook,
+} from './services/bookService'
+import type { Book } from './services/bookService'
 
 const app = express()
 app.use(express.json())
@@ -18,7 +28,7 @@ app.get('/events', async (req: Request, res: Response) => {
   }
 })
 
-app.get('/events/:id',async (req: Request, res: Response) => {
+app.get('/events/:id', async (req: Request, res: Response) => {
   const id = parseInt(req.params.id)
   const event = await getEventById(id)
   if (event) {
@@ -28,25 +38,25 @@ app.get('/events/:id',async (req: Request, res: Response) => {
   }
 })
 
-app.post('/events',async (req: Request, res: Response) => {
+app.post('/events', async (req: Request, res: Response) => {
   const newEvent: Event = req.body
   await addEvent(newEvent)
   res.json(newEvent)
 })
 
-app.get('/books', (req: Request, res: Response) => {
+app.get('/books', async (req: Request, res: Response) => {
   if (req.query.group) {
     const group = req.query.group as string
     const filteredBooks = getBookByGroups(group as string)
     res.json(filteredBooks)
   } else {
-    res.json(getAllBooks())
+    res.json(await getAllBooks())
   }
 })
 
-app.get('/books/:id', (req: Request, res: Response) => {
+app.get('/books/:id', async (req: Request, res: Response) => {
   const id = parseInt(req.params.id)
-  const book = getBookById(id)
+  const book = await getBookById(id)
   if (book) {
     res.json(book)
   } else {
@@ -54,9 +64,9 @@ app.get('/books/:id', (req: Request, res: Response) => {
   }
 })
 
-app.post('/books', (req: Request, res: Response) => {
+app.post('/books', async (req: Request, res: Response) => {
   const newBook: Book = req.body
-  addBook(newBook)
+  await addBook(newBook)
   res.json(newBook)
 })
 

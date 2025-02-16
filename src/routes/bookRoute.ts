@@ -15,7 +15,7 @@ const router = express.Router()
 const upload = multer({ storage: multer.memoryStorage() })
 
 router.post(
-  '/books/upload',
+  '/upload',
   upload.single('file'),
   async (req: any, res: any) => {
     try {

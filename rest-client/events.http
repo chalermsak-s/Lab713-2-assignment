@@ -2,7 +2,7 @@
 GET  http://localhost:3000/events HTTP/1.1
 
 ### Event List by ID
-GET  http://localhost:3000/events/1 HTTP/1.1
+GET  http://localhost:3000/events/2 HTTP/1.1
 
 ### Event Create
 POST http://localhost:3000/events HTTP/1.1

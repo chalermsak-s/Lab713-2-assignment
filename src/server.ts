@@ -36,6 +36,21 @@ app.post('/upload', upload.single('file'), async (req: any, res: any) => {
   }
 })
 
+app.post('/book/upload', upload.single('file'), async (req: any, res: any) => {
+  try {
+    const file = req.file
+    if (!file) {
+      return res.status(400).send('No file uploaded.')
+    }
+    const bucket = 'images'
+    const filePath = `uploads`;
+    const ouputUrl = await uploadFile(bucket, filePath, file)
+    res.status(200).send(ouputUrl)
+  } catch (error) {
+    res.status(500).send('Error uploading file.')
+  }
+})
+
 app.get('/events', async (req: Request, res: Response) => {
   if (req.query.category) {
     const category = req.query.category as string

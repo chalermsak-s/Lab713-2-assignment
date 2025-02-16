@@ -26,6 +26,5 @@ export async function uploadFile(
   console.log('File uploaded successfully:', data)
   const publicUrl = `${process.env.SUPABASE_OUTPUT_URL}/${saltedFilePath}`
   console.log('File uploaded successfully:', publicUrl)
-  console.log('File uploaded successfully:', publicUrl)
   return publicUrl
 }

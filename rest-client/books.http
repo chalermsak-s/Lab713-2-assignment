@@ -1,0 +1,16 @@
+### Book List
+GET  http://localhost:3000/books HTTP/1.1
+
+### Book List by ID
+GET  http://localhost:3000/books/1 HTTP/1.1
+
+### Book Create
+POST http://localhost:3000/books HTTP/1.1
+content-type: application/json
+
+{
+    "title": "Pride and Prejudice",
+    "author_name": "Jane Austen",
+    "description": "A classic novel about love and society.",
+    "groups": ["Romance", "Classic"]
+}

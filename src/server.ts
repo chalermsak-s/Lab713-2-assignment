@@ -1,3 +1,4 @@
+import { group } from 'console'
 import express, { Request, Response } from 'express'
 const app = express()
 app.use(express.json())
@@ -155,6 +156,25 @@ function addEvent(newEvent: Event): Event {
   return newEvent
 }
 
+function getBookByGroups(groups: string): Book[] {
+  const filteredBooks = books.filter((book) => book.groups.includes(groups))
+  return filteredBooks
+}
+
+function getAllBooks(): Book[] {
+  return books
+}
+
+function getBookById(id: number): Book | undefined {
+  return books.find((book) => book.id === id)
+}
+
+function addBook(newBook: Book): Book {
+  newBook.id = books.length + 1
+  books.push(newBook)
+  return newBook
+}
+
 app.get('/events', (req: Request, res: Response) => {
   if (req.query.category) {
     const category = req.query.category as string
@@ -181,30 +201,30 @@ app.post('/events', (req, res) => {
   res.json(newEvent)
 })
 
-app.get('/books/:id', (req: Request, res: Response) => {
-  const id = parseInt(req.params.id)
-  const book = books.find((book) => book.id === id)
-  if (book) {
-    res.json(book)
+app.get('/books', (req: Request, res: Response) => {
+  if (req.query.group) {
+    const group = req.query.group as string
+    const filteredBooks = getBookByGroups(group as string)
+    res.json(filteredBooks)
   } else {
-    res.status(404).send('Book not found')
+    res.json(getAllBooks())
   }
 })
 
-app.post('/books', (req: Request, res: Response) => {
-  const newBook: Book = req.body
-  const existingBookIndex = books.findIndex((book) => book.id === newBook.id)
-
-  if (existingBookIndex !== -1) {
-    // id มีค่าที่มีในระบบ ให้แก้ไข
-    books[existingBookIndex] = newBook
-    res.json({ message: 'Book updated', book: newBook })
+app.get('/books/:id', (req, res) => {
+  const id = parseInt(req.params.id)
+  const book = getBookById(id)
+  if (book) {
+    res.json(book)
   } else {
-    // เพิ่มข้อมูลใหม่
-    newBook.id = books.length + 1
-    books.push(newBook)
-    res.json({ message: 'Book added', book: newBook })
+    res.status(404).send('Event not found')
   }
+})
+
+app.post('/books', (req, res) => {
+  const newBook: Book = req.body
+  addBook(newBook)
+  res.json(newBook)
 })
 
 app.listen(port, () => {

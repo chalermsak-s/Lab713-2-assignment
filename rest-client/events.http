@@ -1,0 +1,20 @@
+### Event List
+GET  http://localhost:3000/events HTTP/1.1
+
+### Event List by ID
+GET  http://localhost:3000/events/1 HTTP/1.1
+
+### Event Create
+POST http://localhost:3000/events HTTP/1.1
+content-type: application/json
+
+{
+    "category": "Film",
+    "title": "The New Blockbuster",
+    "description": "The new blockbuster movie is coming to theaters soon!",
+    "location": "Hollywood",
+    "date": "2021-12-31",
+    "time": "12:00",
+    "petsAllowed": false,
+    "organizer": "The Movie Studio"
+}

@@ -8,7 +8,7 @@ export function getEventByCategory(category: string): Promise<Event[]> {
 }
 
 export function getAllEvents(): Promise<Event[]> {
-  return repo.getAllEvents()
+  return repo.getAllEventsWithOrganizer();
 }
 
 export function getEventById(id: number): Promise<Event | null> {

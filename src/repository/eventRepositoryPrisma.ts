@@ -29,7 +29,15 @@ export function addEvent(newEvent: Event): Promise<Event> {
       date: newEvent.date,
       time: newEvent.time,
       petsAllowed: newEvent.petsAllowed,
-      organizer: newEvent.organizer,
+      organizer: {
+        connect: newEvent.organizer ? { id: newEvent.organizer.id } : undefined,
+      },
     },
+  });
+}
+
+export function getAllEventsWithOrganizer(): Promise<Event[]> {
+  return prisma.event.findMany({
+    include: { organizer: true },
   });
 }

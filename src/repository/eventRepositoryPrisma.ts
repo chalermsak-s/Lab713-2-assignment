@@ -43,12 +43,19 @@ export function getAllEventsWithOrganizer(): Promise<Event[]> {
     select: {
       id: true,
       category: true,
-      organizerId: false,
       organizer: {
         select: {
           name: true,
         },
       },
+      participants: {
+        select: {
+          id: true,
+          name: true,
+          email: true,
+          events: true, // ตรวจสอบว่าฟิลด์ events ถูกต้องหรือไม่
+        },
+      },
     },
-  })
+  });
 }

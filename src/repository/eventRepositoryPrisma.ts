@@ -16,6 +16,11 @@ export function getAllEvents(): Promise<Event[]> {
 export function getEventById(id: number): Promise<Event | null> {
   return prisma.event.findUnique({
     where: { id },
+    select: {
+      title: true,
+      time: true,
+      organizerId: true,
+    },
   })
 }
 

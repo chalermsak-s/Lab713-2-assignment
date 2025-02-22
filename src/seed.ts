@@ -2,15 +2,11 @@ import { createEvents } from './db/createEvents'
 import { PrismaClient } from '@prisma/client'
 import { createParticipants } from './db/createParticipants'
 
-const prisma = new PrismaClient()
-/*  Original */
-createParticipants().catch((e) => {
-  console.error(e)
-  process.exit(1)
-})
+const prisma = new PrismaClient();
 
-/* New */
-// async () => {
-//   await createEvents()
-//   await createParticipants()
-// }
+async function main() {
+  await createEvents();
+  await createParticipants();
+}
+main()
+

@@ -53,7 +53,7 @@ export function getAllEventsWithOrganizer(): Promise<Event[]> {
           id: true,
           name: true,
           email: true,
-          events: true, // ตรวจสอบว่าฟิลด์ events ถูกต้องหรือไม่
+          events: true,
         },
       },
     },

@@ -1,6 +1,6 @@
 import type { Event } from './event'
-export type organizer = {
-  id: number
+export type Organizer = {
+  id?: number
   name: string
-  events?: Event[] | null;
+  events?: Event[]
 }

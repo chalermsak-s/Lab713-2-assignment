@@ -16,5 +16,5 @@ content-type: application/json
     "date": "2021-12-31",
     "time": "12:00",
     "petsAllowed": false,
-    "organizer": "The Movie Studio"
+    "organizer": 1
 }

@@ -1,5 +1,5 @@
 import { Event } from '../models/event'
-import * as repo from '../repository/eventRepositoryDb'
+import * as repo from "../repository/eventRepositoryPrisma";
 
 export {Event}
 
@@ -11,7 +11,7 @@ export function getAllEvents(): Promise<Event[]> {
   return repo.getAllEvents()
 }
 
-export function getEventById(id: number): Promise<Event | undefined> {
+export function getEventById(id: number): Promise<Event | null> {
   return repo.getEventById(id)
 }
 

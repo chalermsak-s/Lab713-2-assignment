@@ -35,7 +35,10 @@ export function addEvent(newEvent: Event): Promise<Event> {
 
 export function getAllEventsWithOrganizer(): Promise<Event[]> {
   return prisma.event.findMany({
-    include: {
+    select: {
+      id: true,
+      category: true,
+      organizerId: false,
       organizer: {
         select: {
           name: true,
